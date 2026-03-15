@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  leo_sim:
+    build: .
+    container_name: leo_sim_container
+    privileged: true
+    network_mode: "host"
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - ROS_DOMAIN_ID=42
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./ros2_ws:/ros2_ws
+    working_dir: /ros2_ws
+    command: tail -f /dev/null
